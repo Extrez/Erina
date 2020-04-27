@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <Erina/Helpers/MemoryHelper.h>
 
 void CreateConsole()
 {
@@ -15,11 +16,14 @@ void CreateConsole()
     freopen_s(&fDummy, "CONOUT$", "w", stderr);
     freopen_s(&fDummy, "CONOUT$", "w", stdout);
 
-    std::cout << "Hello world from Shaiya process" << std::endl;
-    std::cout << "Write a message" << std::endl;
-    std::cin >> text;
+    std::cout << "Hello world from Shaiya console" << std::endl;
 
-    std::cout << "You write the message: " << text << std::endl;
+    DWORD sendPacket = 0x00549C10;
+    DWORD decryptPacket = 0x005451C0;
+
+    auto helper = MemoryHelper();
+    helper.Hook(sendPacket, 5, decryptPacket);
+    helper.Hook(decryptPacket, 5, sendPacket);
 }
 
 
