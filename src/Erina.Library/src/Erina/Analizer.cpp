@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <Erina\Packets\Packet.h>
+#include <Erina\Packets\PacketHandler.h>
 
 typedef void(__cdecl* _sendPacket)(unsigned char* buff, unsigned short length);
 _sendPacket originalSendPacket;
@@ -25,31 +26,42 @@ void Analyzer::Initialize()
 
 void __cdecl  Analyzer::sendPacketHook(unsigned char* buff, unsigned short length)
 {
-	Packet packet = Packet(buff, length);
+	Packet* packet = new Packet(buff, length);
 
-	std::cout << "C -> S: Packet(0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet.Type;
-
-	for (size_t i = 0; i < packet.Data.size(); i++)
+	PacketHandler* handler = new PacketHandler();
+	if (!handler->HandleClientPacket(packet))
 	{
-		std::cout << std::hex << std::setw(2) << std::setfill('0') << std::uppercase << (int)packet.Data[i] << " ";
+		std::cout << "C -> S: Unknow opcode: 0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet->Type << std::endl;
+
+		for (size_t i = 0; i < packet->Data.size(); i++)
+		{
+			std::cout << std::hex << std::setw(2) << std::setfill('0') << std::uppercase << (int)packet->Data[i] << " ";
+		}
+
+		std::cout << std::endl;
 	}
 
-	std::cout << std::endl;
+	delete packet;
 	
 	originalSendPacket(buff, length);
 }
 
 void __cdecl Analyzer::handlePacketHook(unsigned short packetType, unsigned char* buff, unsigned short length)
 {
-	Packet packet = Packet((PacketType)packetType, buff, length);
+	Packet* packet = new Packet((PacketType)packetType, buff, length);
 
-	std::cout << "S -> C: Packet(0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet.Type << "): ";
-
-	for (size_t i = 0; i < packet.Data.size(); i++)
+	PacketHandler* handler = new PacketHandler();
+	if (!handler->HandleServerPacket(packet))
 	{
-		std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)packet.Data[i] << " ";
+		std::cout << "S -> C: Unknow opcode: 0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet->Type << std::endl;
+
+		for (size_t i = 0; i < packet->Data.size(); i++)
+		{
+			std::cout << std::hex << std::setw(2) << std::setfill('0') << std::uppercase << (int)packet->Data[i] << " ";
+		}
+
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 	
 	oroginalHandlePacket(packetType, buff, length);
 }

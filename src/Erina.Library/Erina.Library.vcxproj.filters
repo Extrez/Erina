@@ -33,6 +33,9 @@
     <ClInclude Include="include\Erina\Packets\PacketHandler.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="include\Erina\Packets\Client\LoginRequestPacket.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Erina\Helpers\MemoryHelper.cpp">
@@ -45,6 +48,12 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\Erina\Packets\Packet.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Erina\Packets\PacketHandler.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Erina\Packets\Client\LoginRequestPacket.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
