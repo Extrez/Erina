@@ -3,11 +3,12 @@
 #include <Erina\Helpers\MemoryHelper.h>
 #include <iostream>
 #include <iomanip>
+#include <Erina\Packets\Packet.h>
 
-typedef void(__cdecl* _sendPacket)(unsigned char* packet, unsigned short length);
+typedef void(__cdecl* _sendPacket)(unsigned char* buff, unsigned short length);
 _sendPacket originalSendPacket;
 
-typedef void(__cdecl* _handlePacket)(unsigned short packetType, unsigned char* packet, unsigned short length);
+typedef void(__cdecl* _handlePacket)(unsigned short packetType, unsigned char* buff, unsigned short length);
 _handlePacket oroginalHandlePacket;
 
 void Analyzer::Initialize()
@@ -22,29 +23,33 @@ void Analyzer::Initialize()
 }
 
 
-void __cdecl  Analyzer::sendPacketHook(unsigned char* packet, unsigned short length)
+void __cdecl  Analyzer::sendPacketHook(unsigned char* buff, unsigned short length)
 {
-	auto packetType = *reinterpret_cast<unsigned short*>(packet);
-	std::cout << "C-S -> Packet(0x" << std::hex << packetType << "):";
+	Packet packet = Packet(buff, length);
 
-	for (size_t i = 2; i < length; i++)
+	std::cout << "C -> S: Packet(0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet.Type;
+
+	for (size_t i = 0; i < packet.Data.size(); i++)
 	{
-		std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)packet[i] << " ";
+		std::cout << std::hex << std::setw(2) << std::setfill('0') << std::uppercase << (int)packet.Data[i] << " ";
 	}
-	std::cout << "\tLength: " << length << std::endl;
+
+	std::cout << std::endl;
 	
-	originalSendPacket(packet, length);
+	originalSendPacket(buff, length);
 }
 
-void __cdecl Analyzer::handlePacketHook(unsigned short packetType, unsigned char* packet, unsigned short length)
+void __cdecl Analyzer::handlePacketHook(unsigned short packetType, unsigned char* buff, unsigned short length)
 {
-	std::cout << "S-C -> Packet(0x" << std::hex << packetType << "):";
+	Packet packet = Packet((PacketType)packetType, buff, length);
 
-	for (size_t i = 0; i < length; i++)
+	std::cout << "S -> C: Packet(0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet.Type << "): ";
+
+	for (size_t i = 0; i < packet.Data.size(); i++)
 	{
-		std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)packet[i] << " ";
+		std::cout << std::hex << std::setfill('0') << std::setw(2) << (int)packet.Data[i] << " ";
 	}
-	std::cout << "\tLength: " << length << std::endl;
+	std::cout << std::endl;
 	
-	oroginalHandlePacket(packetType, packet, length);
+	oroginalHandlePacket(packetType, buff, length);
 }

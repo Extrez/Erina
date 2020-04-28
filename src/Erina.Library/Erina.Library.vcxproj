@@ -22,11 +22,15 @@
     <ClCompile Include="src\Erina\Analizer.cpp" />
     <ClCompile Include="src\Erina\Helpers\ConsoleHelper.cpp" />
     <ClCompile Include="src\Erina\Helpers\MemoryHelper.cpp" />
+    <ClCompile Include="src\Erina\Packets\Packet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Erina\Analyzer.h" />
     <ClInclude Include="include\Erina\Helpers\ConsoleHelper.h" />
     <ClInclude Include="include\Erina\Helpers\MemoryHelper.h" />
+    <ClInclude Include="include\Erina\Packets\Packet.h" />
+    <ClInclude Include="include\Erina\Packets\PacketHandler.h" />
+    <ClInclude Include="include\Erina\Packets\PacketType.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
