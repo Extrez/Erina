@@ -8,9 +8,11 @@ Erina it's an open source [Shaiya](https://shaiya.fandom.com/wiki/Main_Page) pac
 -   Application type:  `DLL`
 -   Tools:
 	- [Shaiya Game Client](https://www.elitepvpers.com/forum/shaiya-pserver-guides-releases/3808202-tiny-release-shaiya-episode-1-game-client-light-darkness.html)
-    - [x64dbg](https://x64dbg.com/)
+	- [Shaiya Server emulator](https://www.elitepvpers.com/forum/shaiya-pserver-development/244203-shaiya-private-server-instructions-english.html)
+    - [Cheat Engine](https://www.cheatengine.org/)
+	- [x64dbg](https://x64dbg.com/)
 -   Environment: Visual Studio 2019
 
 ## Features
 
-Nothing to show here.
+-	Show all Client packets in console.
