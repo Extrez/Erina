@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,9 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Erina\Analizer.cpp" />
+    <ClCompile Include="src\Erina\Helpers\ConsoleHelper.cpp" />
     <ClCompile Include="src\Erina\Helpers\MemoryHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Erina\Analyzer.h" />
+    <ClInclude Include="include\Erina\Helpers\ConsoleHelper.h" />
     <ClInclude Include="include\Erina\Helpers\MemoryHelper.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -19,7 +19,7 @@ void* MemoryHelper::Hook(DWORD address, size_t length, DWORD target)
 
 	if (length > 5)
 	{
-		for (size_t i = 0; i < length; i++)
+		for (size_t i = 0; i < length - 5; i++)
 		{
 			*reinterpret_cast<BYTE*>(address + 5 + i) = NOP;
 		}
