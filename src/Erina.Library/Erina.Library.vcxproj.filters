@@ -33,7 +33,10 @@
     <ClInclude Include="include\Erina\Packets\PacketHandler.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\Erina\Packets\Client\LoginRequestPacket.h">
+    <ClInclude Include="include\Erina\Packets\Client\ClientLoginRequestPacket.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Erina\Packets\Server\ServerLoginRequestPacket.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,7 +56,10 @@
     <ClCompile Include="src\Erina\Packets\PacketHandler.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Erina\Packets\Client\LoginRequestPacket.cpp">
+    <ClCompile Include="src\Erina\Packets\Client\ClientLoginRequestPacket.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Erina\Packets\Server\ServerLoginRequestPacket.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

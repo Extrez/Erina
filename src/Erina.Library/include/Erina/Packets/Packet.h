@@ -13,7 +13,7 @@ public:
 	
 	PacketType Type;
 
-	std::vector<unsigned char> Data;
+	unsigned char* Data;
 
 	Packet(PacketType packetType, unsigned char* buffer, unsigned short length);
 	Packet(unsigned char* buffer, unsigned short length);

@@ -5,11 +5,11 @@
 Packet::Packet(PacketType packetType, unsigned char* buffer, unsigned short length)
 {
 	this->Type = packetType;
-	this->Data.assign(buffer, buffer + length);
+	this->Data = buffer;
 }
 
 Packet::Packet(unsigned char* buffer, unsigned short length)
 {
 	this->Type = (PacketType)*reinterpret_cast<unsigned short*>(buffer);
-	this->Data.assign(buffer + 2, buffer + length);
+	this->Data = buffer + 2;
 }

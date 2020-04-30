@@ -1,9 +1,14 @@
 #include <Erina/Packets/PacketHandler.h>
-#include <Erina/Packets/Client/LoginRequestPacket.h>
+#include <Erina/Packets/Client/ClientLoginRequestPacket.h>
+#include <Erina/Packets/Server/ServerLoginRequestPacket.h>
 
 PacketHandler::PacketHandler()
 {
-	this->_clientPacketHandler[PacketType::LoginRequest] = new LoginRequestPacket("Login Request");
+	// Client handler
+	this->_clientPacketHandler[PacketType::LoginRequest] = new ClientLoginRequestPacket("Login Request");
+
+	// Server handler
+	this->_serverPacketHandler[PacketType::LoginRequest] = new ServerLoginRequestPacket("Login Request");
 }
 
 bool PacketHandler::HandleClientPacket(const Packet* packet)

@@ -33,7 +33,7 @@ void __cdecl  Analyzer::sendPacketHook(unsigned char* buff, unsigned short lengt
 	{
 		std::cout << "C -> S: Unknow opcode: 0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet->Type << std::endl;
 
-		for (size_t i = 0; i < packet->Data.size(); i++)
+		for (size_t i = 0; i < length - 2; i++)
 		{
 			std::cout << std::hex << std::setw(2) << std::setfill('0') << std::uppercase << (int)packet->Data[i] << " ";
 		}
@@ -55,7 +55,7 @@ void __cdecl Analyzer::handlePacketHook(unsigned short packetType, unsigned char
 	{
 		std::cout << "S -> C: Unknow opcode: 0x" << std::hex << std::setw(4) << std::setfill('0') << std::uppercase << packet->Type << std::endl;
 
-		for (size_t i = 0; i < packet->Data.size(); i++)
+		for (size_t i = 0; i < length; i++)
 		{
 			std::cout << std::hex << std::setw(2) << std::setfill('0') << std::uppercase << (int)packet->Data[i] << " ";
 		}
